@@ -1,17 +1,20 @@
+from typing import List
+
+
 class Solution(object):
-    def merge(self, nums1: list, m: int, nums2: list, n: int):
-        output1 = []
-        output2 = []
-        for i in range(min(len(nums1), m)):
-            output1.append(nums1[i])
+    def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
+        a, b, write_index = m - 1, n - 1, m + n - 1
 
-        for i in range(min(len(nums2), n)):
-            output2.append(nums2[i])
+        while b >= 0:
+            if a >= 0 and nums1[a] > nums2[b]:
+                nums1[write_index] = nums1[a]
+                a -= 1
+            else:
+                nums1[write_index] = nums2[b]
+                b -= 1
 
-        final = output1 + output2
-        final.sort()
-        return final
-
+            write_index -= 1
+        return nums1
 
 a = Solution()
 nums1 = [1, 2, 3, 0, 0, 0]
